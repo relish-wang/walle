@@ -1,11 +1,12 @@
 apply plugin: 'java'
-apply from: rootProject.file("mt_maven.gradle")
-apply from: rootProject.file('quality.gradle')
+apply from: '../gradle/upload_to_jcenter.gradle'
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compileOnly 'org.json:json:20080701'//提供org.json环境，开发时注意与Android org.json api兼容
-    compile project(':payload_reader')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly 'org.json:json:20180813'//提供org.json环境，开发时注意与Android org.json api兼容
+
+    // implementation project(':reader')
+    implementation "${GROUP_ID}:walle-reader:${VERSION_NAME}"
 }
 
 sourceCompatibility = javaVersion

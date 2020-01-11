@@ -8,6 +8,23 @@ Walle（瓦力）：Android Signature V2 Scheme签名下的新一代渠道包打
 
 瓦力通过在Apk中的`APK Signature Block`区块添加自定义的渠道信息来生成渠道包，从而提高了渠道包生成效率，可以作为单机工具来使用，也可以部署在HTTP服务器上来实时处理渠道包Apk的升级网络请求。
 
+## 修改者自述
+
+鉴于美团对此仓库长期不更新, 各个依赖库版本都比较低, 使用了过时的API等问题。本人fork了Walle仓库, 进行了升级的操作。
+修改部分如下:
+ - 1 support -> AndroidX
+ - 2 修改了groupId(因为我无权使用walle原来的groupId), 发布到了jcenter
+ - 3 升级了gradle各插件的版本
+ - 3 升级了compileSdkVersion、targetSdkVersion等配置
+
+### 引用
+
+```groovy
+implementation "wang.relish.walle:walle:2.0.0"
+```
+
+**以下是原仓库文档, Enjoy it.**
+
 ## Quick Start
 为了方便大家的使用，我们提供了2种使用方式：
 
@@ -33,7 +50,7 @@ buildscript {
 apply plugin: 'walle'
 
 dependencies {
-    compile 'com.meituan.android.walle:library:1.1.6'
+    implementation 'com.meituan.android.walle:library:1.1.6'
 }
 ```
 
