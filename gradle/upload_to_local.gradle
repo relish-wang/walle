@@ -1,0 +1,33 @@
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+                groupId = GROUP_ID
+                artifactId = ARTIFACT_ID
+                version = VERSION_NAME
+            }
+
+            repository(url: uri('./../repo'))
+        }
+    }
+}
+
+task javadocs(type: Javadoc) {
+    source = sourceSets.main.allJava
+    destinationDir = new File(project.buildDir, "javadocs")
+    failOnError false
+}
+task javadocsJar(type: Jar, dependsOn: javadocs) {
+    classifier = 'javadoc'
+    from new File(project.buildDir, "javadocs")
+}
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.java.srcDirs
+}
+artifacts {
+    archives sourcesJar
+    archives javadocsJar
+}

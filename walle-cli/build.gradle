@@ -1,15 +1,16 @@
 buildscript {
     repositories {
-        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
-apply from: rootProject.file('quality.gradle')
 
 jar {
     manifest {
@@ -19,12 +20,16 @@ jar {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile "com.beust:jcommander:1.48"
-    compile 'commons-io:commons-io:2.5'
-    compile project(':payload_writer')
-    compile 'org.json:json:20080701' //与gradle plugin使用同一版本
-    compile 'com.google.code.gson:gson:2.8.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.beust:jcommander:1.48"
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.json:json:20180813' //与gradle plugin使用同一版本
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    // implementation project(':writer')
+    // implementation project(':reader')
+    implementation "${GROUP_ID}:walle-writer:${VERSION_NAME}"
+    implementation "${GROUP_ID}:walle-reader:${VERSION_NAME}"
 }
 
 sourceCompatibility = javaVersion
