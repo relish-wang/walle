@@ -1,12 +1,12 @@
 include ':walle-plugin'
 include ':library'
-include ':payload_reader'
-include ':payload_writer'
+include ':walle-reader'
+include ':walle-writer'
 include ':app'
 include ':walle-cli'
 
 project(":library").name = "walle"
-project(":payload_reader").name = "reader"
-project(":payload_writer").name = "writer"
+project(":walle-reader").name = "reader"
+project(":walle-writer").name = "writer"
 project(":walle-cli").name = "cli"
 project(":walle-plugin").name = "plugin"
